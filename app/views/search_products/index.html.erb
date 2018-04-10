@@ -1,0 +1,53 @@
+<div class="row title_header">
+  <div class="col-md-8">
+     <h2> Products Listing</h2>
+  </div>
+</div>
+<div class="products_search">
+  <%= render 'search_products/search'%>
+</div>
+<div class="products_listing">
+  <%= render 'search_products/listing', products_listings: @products_listings %>
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("input#category_text").on("keypress paste",function (){
+      var category_text =  $("input#category_text");
+      var available_categories = ''
+      if($(category_text).val().length == 3) {
+        $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "/search_products/category_lookup",
+          data: { search_text: $(category_text).val() } ,
+          success: start_autocomplete 
+        });
+      }        
+    });
+
+    $('input#category_text').keyup(function(e) {
+        if(e.keyCode == 13) { search_request(); }
+    });
+  });
+
+  function start_autocomplete(result, textStatus, xhr) {
+    $("#categories_list").data(result);
+    $(category_text).autocomplete({
+      source:  function (request, response) {
+        response(Object.keys(result));
+      },
+    }).keydown();
+  }
+
+  function search_request() {
+    $.ajax({
+      type: "GET",
+      dataType: "script",
+      url: "/search_products",
+      data: { category_name: $('input#category_text').val(),
+              uuid: $("#categories_list").data($('input#category_text').val()) }
+    });
+  }     
+</script>
