@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Please follow the instructions for setting up and running the application on ubuntu environment:
 
-Things you may want to cover:
+* Please install Ruby 2.3+
 
-* Ruby version
+* Please install Rails 5.0.7
 
-* System dependencies
+* Run : bundle install 
 
-* Configuration
+* Start up the application with : rails server
 
-* Database creation
+* I have implemented all the features mentioned in the problem statement. However for the ease of my own development for now, while searching for categories please type at least 4 characters in the textbox and after selecting the needed category please press enter to search on products listing based on category.
 
-* Database initialization
+* I haven't written all the test cases, because I have only worked on the coding challenge for around 3 hours. I can write other test cases if that is required.
+  For running the test cases run : bundle exec rspec spec/controllers/search_products_controller_spec.rb  
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* I haven't tried to make the app look aesthetically pleasing, just some basic styling with bootstrap is added.
